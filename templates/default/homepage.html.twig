@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'homepage' %}
+
+{#
+    the homepage is a special page which displays neither a header nor a footer.
+    this is done with the 'trick' of defining empty Twig blocks without any content
+#}
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+<style>
+    .page-header {
+        text-align: right;
+        padding-top: 20px;
+        padding-right: 40px;
+        background-image: url("{{asset('assets/images/background/homepage.jpg')}}");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .page-header a {
+        font-size: 18px;
+        padding: 8px 20px 8px 20px;
+    }
+</style>
+    <div class="page-header">
+        <a href="/en/login"  class="btn btn-sm btn-primary">
+            {{ 'title.homelogin'|trans }}
+        </a>
+    </div>
+
+    <!-- <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <p>
+                    {{ 'help.browse_app'|trans|raw }}
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('blog_index') }}">
+                        <i class="fa fa-users" aria-hidden="true"></i> {{ 'action.browse_app'|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <p>
+                    {{ 'help.browse_admin'|trans|raw }}
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('user_managements_index') }}">
+                        <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.browse_admin'|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div> -->
+   
+    {% endblock %}

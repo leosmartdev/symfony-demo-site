@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+
+<div class="editPage">
+    <div class="edit">
+        <h1>{{ 'title.new_User'|trans }}</h1>
+
+    {{ include('contoller_view/_form.html.twig') }}
+
+    <a href="{{ path('contoller_view_index') }}">{{'back_to_list'|trans}}</a>
+</div>
+</div>
+{% endblock %}
