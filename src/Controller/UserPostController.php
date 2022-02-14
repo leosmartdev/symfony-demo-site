@@ -22,7 +22,7 @@ class UserPostController extends AbstractController
     public function index(Connection $conn): Response
     {
         $queryBuilder = $conn->createQueryBuilder();
-        $data = $queryBuilder->select('*')->from('symfony_demo_user')->execute()->fetchAll();
+        $data = $queryBuilder->select('*')->from('usuarios_usu')->execute()->fetchAll();
         return $this->render('user_post/index.html.twig', ['posts' => $data]);
 
     }

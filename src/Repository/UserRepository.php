@@ -31,4 +31,17 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
+
+    public function getAllUsers($filter = array()) {
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->select('u.id, u.nombre_usu, u.apellidos_usu, u.tipo_usu, u.email_usu, u.activo_usu, u.fechaC_usu, u.usuC_usu, u.fechaM_usu, u.usuM_usu, u.borrado_usu, u.fechaUltAcceso_usu, u.roles, u.pais_usu');
+        $queryBuilder->addSelect('uc.nombre_usu AS c_nombre_usu');
+        $queryBuilder->addSelect('um.nombre_usu AS m_nombre_usu');
+        if (array_key_exists("country", $filter)) {
+            $queryBuilder->andWhere('u.pais_usu = :val')->setParameter('val', $filter['country']);
+        }
+        $queryBuilder->leftJoin(User::class, 'uc', 'with', "u.usuC_usu = uc.id");
+        $queryBuilder->leftJoin(User::class, 'um', 'with', "u.usuM_usu = um.id");
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

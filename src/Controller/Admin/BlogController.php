@@ -66,7 +66,7 @@ class BlogController extends AbstractController
     {
         $cur_rol = $this->getUser()->getCountry();
         $queryBuilder = $conn->createQueryBuilder();
-        $data = $queryBuilder->select('*')->from('symfony_demo_user')->execute()->fetchAll();
+        $data = $queryBuilder->select('*')->from('usuarios_usu')->execute()->fetchAll();
         return $this->render('admin/blog/index.html.twig', ['posts' => $cur_rol]);
 
     }

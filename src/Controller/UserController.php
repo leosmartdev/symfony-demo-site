@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\RolesRepository;
 
 /**
  * Controller used to manage current user.
@@ -31,15 +32,17 @@ class UserController extends AbstractController
 {
 
     #[Route('/loginSuceess', methods: ['GET', 'POST'], name: 'login_success')]
-    public function loginSuccess()
+    public function loginSuccess(RolesRepository $rolesRepository)
     {
 
         $cur_rol = $this->getUser()->getRoles();
         
-        if(in_array('ROLE_ADMIN', $cur_rol)) {
+        $adminRole = $rolesRepository->getRoleByName('ROLE_ADMIN');
+        $controllerRole = $rolesRepository->getRoleByName('ROLE_CONTROLLER');
+        if(in_array($adminRole->getId(), $cur_rol)) {
            return  $this->redirectToRoute('user_managements_index');
         }
-        else if(in_array('ROLE_CONTROLLER', $cur_rol)) {
+        else if(in_array($controllerRole->getId(), $cur_rol)) {
            return  $this->redirectToRoute('contoller_view_index');
         }
 

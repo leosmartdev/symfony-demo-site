@@ -9,73 +9,67 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use App\Entity\Roles;
+use App\Repository\RolesRepository;
 
 class User2Type extends AbstractType
 {
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
                 // enable this type to accept a limited set of countries
                 'allowed_countries' => null,
+                'roles' => [],
             ])
         ;
     }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
+
         $allowedCountries = $options['allowed_countries'];
+        $roles = $options['roles'];
+        $roleChoices = array();
+        foreach($roles as $role) {
+            $roleChoices[$role->getDescripcionRole()] = $role->getId();
+        }
         $builder
-            ->add(
-                'name',
-                null,
-                array('label' => 'name', 'required' => true))
-            ->add(
-                'surname',
-                null,
-                array('label' => 'surname', 'required' => true))
-            ->add(
-                'username',
-                null,
-                array('label' => 'username', 'required' => true))
             ->add(
                 'email',
                 null,
                 array('label' => 'email', 'required' => true))
             ->add(
+                'username',
+                null,
+                array('label' => 'username', 'required' => true))
+            ->add(
+                'surname',
+                null,
+                array('label' => 'surname', 'required' => true))
+            ->add(
                 'password',
                 null,
                 array('label' => 'password', 'required' => true))
+            ->add(
+                'activo_usu', HiddenType::class, [
+                    'data' => 1,
+                ])
             ->add('Roles', ChoiceType::class, [
                 'label' => 'role',
                 'required' => true,
                 'multiple' => false,
                 'expanded' => false,
-                'choices'  => [
-                    'Admin' => 'ROLE_ADMIN',
-                    'Partner' => 'ROLE_CONTROLLER',
-                    'User' => 'ROLE_USER',
-                ],
+                'choices'  => $roleChoices,
             ])
-            ->add(
-                'add_user',
-                null,
-                array('label' => 'add_user', 'required' => true))
-            ->add(
-                'update_user',
-                null,
-                array('label' => 'update_user', 'required' => true))
-            ->add(
-                'create_at')
-            ->add(
-                'update_at')
             ->add('country',
-                    CountryType::class, [
-                    'required' => true,
-                    'label' => 'country',
-                    'choice_filter' => $allowedCountries ? function ($countryCode) use ($allowedCountries) {
-                        return in_array($countryCode, $allowedCountries, true);
-                    } : null,
+                CountryType::class, [
+                'required' => true,
+                'label' => 'country',
+                'choice_filter' => $allowedCountries ? function ($countryCode) use ($allowedCountries) {
+                    return in_array($countryCode, $allowedCountries, true);
+                } : null,
 
             ])
         ;

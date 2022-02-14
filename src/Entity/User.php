@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @ORM\Table(name="symfony_demo_user")
+ * @ORM\Table(name="usuarios_usu")
  *
  * Defines the properties of the User entity to represent the application users.
  * See https://symfony.com/doc/current/doctrine.html#creating-an-entity-class
@@ -39,30 +39,69 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     /**
-     * @ORM\Column(type="string")
-     */
-    #[Assert\NotBlank]
-    private ?string $Name = null;
-
-    /**
      * @ORM\Column(type="string", unique=true)
      */
     #[
         Assert\NotBlank,
         Assert\Length(min: 2, max: 50)
     ]
-    private ?string $username = '';
+    private ?string $nombre_usu = '';
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $apellidos_usu;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $tipo_usu;
 
     /**
      * @ORM\Column(type="string", unique=true)
      */
     #[Assert\Email]
-    private ?string $email = null;
+    private ?string $email_usu = null;
 
     /**
      * @ORM\Column(type="string")
      */
-    private ?string $password = null;
+    private ?string $pass_usu = null;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $activo_usu;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fechaC_usu;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $usuC_usu;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fechaM_usu;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $usuM_usu;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $borrado_usu;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $fechaUltAcceso_usu;
 
     /**
      * @ORM\Column(type="json")
@@ -72,51 +111,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $surname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $add_user;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $update_user;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $create_at;
-
-    /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $update_at;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $country;
+    private $pais_usu;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setName(string $Name): void
-    {
-        $this->Name = $Name;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->Name;
-    }
-
     public function getUserIdentifier(): string
     {
-        return $this->username;
+        return $this->nombre_usu;
     }
 
     public function getUsername(): string
@@ -126,27 +130,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setUsername(string $username): void
     {
-        $this->username = $username;
+        $this->nombre_usu = $username;
     }
 
     public function getEmail(): ?string
     {
-        return $this->email;
+        return $this->email_usu;
     }
 
     public function setEmail(string $email): void
     {
-        $this->email = $email;
+        $this->email_usu = $email;
     }
 
     public function getPassword(): ?string
     {
-        return $this->password;
+        return $this->pass_usu;
     }
 
     public function setPassword(string $password): void
     {
-        $this->password = $password;
+        $this->pass_usu = $password;
     }
 
     /**
@@ -197,83 +201,131 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        return [$this->id, $this->username, $this->password];
+        return [$this->id, $this->nombre_usu, $this->pass_usu];
     }
 
     public function __unserialize(array $data): void
     {
         // add $this->salt too if you don't use Bcrypt or Argon2i
-        [$this->id, $this->username, $this->password] = $data;
+        [$this->id, $this->nombre_usu, $this->pass_usu] = $data;
     }
 
     public function getSurname(): ?string
     {
-        return $this->surname;
+        return $this->apellidos_usu;
     }
 
     public function setSurname(string $surname): self
     {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    public function getAddUser(): ?string
-    {
-        return $this->add_user;
-    }
-
-    public function setAddUser(string $add_user): self
-    {
-        $this->add_user = $add_user;
-
-        return $this;
-    }
-
-    public function getUpdateUser(): ?string
-    {
-        return $this->update_user;
-    }
-
-    public function setUpdateUser(string $update_user): self
-    {
-        $this->update_user = $update_user;
-
-        return $this;
-    }
-
-    public function getCreateAt(): ?\DateTimeImmutable
-    {
-        return $this->create_at;
-    }
-
-    public function setCreateAt(\DateTimeImmutable $create_at): self
-    {
-        $this->create_at = $create_at;
-
-        return $this;
-    }
-
-    public function getUpdateAt(): ?\DateTimeImmutable
-    {
-        return $this->update_at;
-    }
-
-    public function setUpdateAt(\DateTimeImmutable $update_at): self
-    {
-        $this->update_at = $update_at;
+        $this->apellidos_usu = $surname;
 
         return $this;
     }
 
     public function getCountry(): ?string
     {
-        return $this->country;
+        return $this->pais_usu;
     }
 
     public function setCountry(string $country): self
     {
-        $this->country = $country;
+        $this->pais_usu = $country;
+
+        return $this;
+    }
+
+    public function getTipoUsu(): ?string
+    {
+        return $this->tipo_usu;
+    }
+
+    public function setTipoUsu(string $tipo_usu): self
+    {
+        $this->tipo_usu = $tipo_usu;
+
+        return $this;
+    }
+
+    public function getUsuCUsu(): ?int
+    {
+        return $this->usuC_usu;
+    }
+
+    public function setUsuCUsu(?int $usuC_usu): self
+    {
+        $this->usuC_usu = $usuC_usu;
+
+        return $this;
+    }
+
+    public function getFechaCUsu(): ?\DateTimeInterface
+    {
+        return $this->fechaC_usu;
+    }
+
+    public function setFechaCUsu(?\DateTimeInterface $fechaC_usu): self
+    {
+        $this->fechaC_usu = $fechaC_usu;
+
+        return $this;
+    }
+
+    public function getUsuMUsu(): ?int
+    {
+        return $this->usuM_usu;
+    }
+
+    public function setUsuMUsu(?int $usuM_usu): self
+    {
+        $this->usuM_usu = $usuM_usu;
+
+        return $this;
+    }
+
+    public function getFechaMUsu(): ?\DateTimeInterface
+    {
+        return $this->fechaM_usu;
+    }
+
+    public function setFechaMUsu(?\DateTimeInterface $fechaM_usu): self
+    {
+        $this->fechaM_usu = $fechaM_usu;
+
+        return $this;
+    }
+
+    public function getBorradoUsu(): ?int
+    {
+        return $this->borrado_usu;
+    }
+
+    public function setBorradoUsu(int $borrado_usu): self
+    {
+        $this->borrado_usu = $borrado_usu;
+
+        return $this;
+    }
+
+    public function getFechaUltAccesoUsu(): ?\DateTimeInterface
+    {
+        return $this->fechaUltAcceso_usu;
+    }
+
+    public function setFechaUltAccesoUsu(?\DateTimeInterface $fechaUltAcceso_usu): self
+    {
+        $this->fechaUltAcceso_usu = $fechaUltAcceso_usu;
+
+        return $this;
+    }
+
+    public function getActivoUsu(): ?int
+    {
+        return $this->activo_usu;
+    }
+
+    public function setActivoUsu(int $activo_usu): self
+    {
+        $this->activo_usu = $activo_usu;
 
         return $this;
     }

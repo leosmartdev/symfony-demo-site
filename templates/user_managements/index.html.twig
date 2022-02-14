@@ -40,11 +40,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>{{ 'label.name'|trans }}</th>
-                <th>{{ 'label.Surname'|trans }}</th>
-                <th>{{'label.username'|trans}}</th>
                 <th>{{'label.email'|trans}}</th>
-                <!-- <th>Password</th> -->
+                <th>{{'label.username'|trans}}</th>
+                <th>{{'label.Surname'|trans}}</th>
                 <th>{{'label.role'|trans}}</th>
                 <th>{{'label.Add_User'|trans}}</th>
                 <th>{{'label.Update_User'|trans}}</th>
@@ -62,21 +60,21 @@
                     {% set i = i + 1 %}
                     {{i}}
                 </td>
-                <td>{{ user.Name }}</td>
-                <td>{{ user.surname }}</td>
-                <td>{{ user.username }}</td>
-                <td>{{ user.email }}</td>
-                <!-- <td>{{ user.password }}</td> -->
+                <td>{{ user.email_usu }}</td>
+                <td>{{ user.nombre_usu }}</td>
+                <td>{{ user.apellidos_usu }}</td>
                 <td>
                     <!-- {{ user.roles ? user.roles|json_encode : '' }} -->
-                   {{user.roles[0]}}
-                
+                    <!-- {{user.roles[0]}} -->
+                    {% if roles[user.roles[0]] is defined %}
+                        {{ roles[user.roles[0]] }}
+                    {% endif %}
                 </td>
-                <td>{{ user.addUser }}</td>
-                <td>{{ user.updateUser }}</td>
-                <td>{{ user.createAt ? user.createAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.updateAt ? user.updateAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ user.country }}</td>
+                <td>{{ user.c_nombre_usu }}</td>
+                <td>{{ user.m_nombre_usu }}</td>
+                <td>{{ user.fechaC_usu ? user.fechaC_usu|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.fechaM_usu ? user.fechaM_usu|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.pais_usu }}</td>
                 <td class="text-right">
                     <div class="item-actions"></div>
                         <!-- <a href="{{ path('user_managements_show', {'id': user.id}) }}" class="btn btn-sm btn-default">
