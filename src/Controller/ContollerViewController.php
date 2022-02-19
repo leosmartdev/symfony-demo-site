@@ -54,6 +54,7 @@ class ContollerViewController extends AbstractController
         $roles = $rolesRepository->findAll();
         $form = $this->createForm(User3Type::class, $user, [
             "roles" => $roles,
+            "edit" => false,
         ]);
         $form->handleRequest($request);
 
@@ -106,6 +107,7 @@ class ContollerViewController extends AbstractController
         $roles = $rolesRepository->findAll();
         $form = $this->createForm(User3Type::class, $user, [
             "roles" => $roles,
+            "edit" => true,
         ]);
         $form->handleRequest($request);
 
@@ -115,13 +117,13 @@ class ContollerViewController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $plainpwd = $user->getPassword();
-            $hashedPassword = $passwordHasher->hashPassword(
-                $user,
-                $plainpwd
-            );
-            $user->setPassword($hashedPassword);
-            $entityManager->flush();
+            // $plainpwd = $user->getPassword();
+            // $hashedPassword = $passwordHasher->hashPassword(
+            //     $user,
+            //     $plainpwd
+            // );
+            // $user->setPassword($hashedPassword);
+            // $entityManager->flush();
 
             // remove prev roles
             $prevUserRoles = $userRolesRepository->getUserRoles($user->getId());

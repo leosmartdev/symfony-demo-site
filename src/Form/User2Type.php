@@ -23,6 +23,7 @@ class User2Type extends AbstractType
                 // enable this type to accept a limited set of countries
                 'allowed_countries' => null,
                 'roles' => [],
+                'edit' => false,
             ])
         ;
     }
@@ -35,6 +36,7 @@ class User2Type extends AbstractType
         foreach($roles as $role) {
             $roleChoices[$role->getDescripcionRole()] = $role->getId();
         }
+        $edit = $options['edit'];
         $builder
             ->add(
                 'email',
@@ -43,15 +45,19 @@ class User2Type extends AbstractType
             ->add(
                 'username',
                 null,
-                array('label' => 'username', 'required' => true))
+                array('label' => 'name', 'required' => true))
             ->add(
                 'surname',
                 null,
-                array('label' => 'surname', 'required' => true))
-            ->add(
-                'password',
-                null,
-                array('label' => 'password', 'required' => true))
+                array('label' => 'surname', 'required' => true));
+        if (!$edit) {
+            $builder
+                ->add(
+                    'password',
+                    null,
+                    array('label' => 'password', 'required' => true));
+        }
+        $builder
             ->add(
                 'activo_usu', HiddenType::class, [
                     'data' => 1,
