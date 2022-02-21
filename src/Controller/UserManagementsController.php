@@ -29,9 +29,7 @@ class UserManagementsController extends AbstractController
         foreach($roles as $role) {
             $rolesData[$role->getId()] = $role->getNombreRole();
         }
-        // print_r($users); exit;
         return $this->render('user_managements/index.html.twig', [
-            // 'users' => $userRepository->findAll(),
             'users' => $users,
             'roles' => $rolesData,
         ]);
@@ -107,14 +105,6 @@ class UserManagementsController extends AbstractController
             $user->setFechaMUsu(new \DateTime());
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // $plainpwd = $user->getPassword();
-            // $hashedPassword = $passwordHasher->hashPassword(
-            //     $user,
-            //     $plainpwd
-            // );
-            // $user->setPassword($hashedPassword);
-            // $entityManager->flush();
 
             // remove prev roles
             $prevUserRoles = $userRolesRepository->getUserRoles($user->getId());

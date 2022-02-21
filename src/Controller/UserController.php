@@ -49,6 +49,22 @@ class UserController extends AbstractController
         return  $this->redirectToRoute('user_view');
     }
 
+    #[Route('/user/list', name: 'user_list', methods: ['GET'])]
+    public function list(RolesRepository $rolesRepository) {
+        $cur_rol = $this->getUser()->getRoles();
+        
+        $adminRole = $rolesRepository->getRoleByName('ROLE_ADMIN');
+        $controllerRole = $rolesRepository->getRoleByName('ROLE_CONTROLLER');
+        if(in_array($adminRole->getId(), $cur_rol)) {
+           return  $this->redirectToRoute('user_managements_index');
+        }
+        else if(in_array($controllerRole->getId(), $cur_rol)) {
+           return  $this->redirectToRoute('contoller_view_index');
+        }
+
+        exit("Permission Error");
+    }
+
     #[Route('/edit', methods: ['GET', 'POST'], name: 'user_edit')]
     public function edit(Request $request, EntityManagerInterface $entityManager): Response
     {

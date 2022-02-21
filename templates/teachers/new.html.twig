@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teacher Detail New{% endblock %}
+
+{% block body %}
+
+<div class="editPage">
+    <div class="edit">
+        <h1>{{ 'title.new_workshop'|trans }}</h1>
+
+    {{ include('teachers/_form.html.twig') }}
+
+    <a href="{{ path('teacher_list_details') }}">{{'back_to_list'|trans}}</a>
+    </div>
+    </div>
+{% endblock %}

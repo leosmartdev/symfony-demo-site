@@ -140,6 +140,14 @@
                 <source>title.comment_error</source>
                 <target>Se ha producido un error al publicar tu comentario</target>
             </trans-unit>
+            <trans-unit id="title.new_workshop">
+                <source>title.new_workshop</source>
+                <target>Añadir Tallere</target>
+            </trans-unit>
+            <trans-unit id="title.edit_workshop">
+                <source>title.edit_workshop</source>
+                <target>Editar Tallere</target>
+            </trans-unit>
 
             <trans-unit id="action.show">
                 <source>action.show</source>
@@ -228,6 +236,14 @@
             <trans-unit id="action.browse_admin">
                 <source>action.browse_admin</source>
                 <target>Acceder al backend</target>
+            </trans-unit>
+            <trans-unit id="action.add">
+                <source>action.add</source>
+                <target>Añadir</target>
+            </trans-unit>
+            <trans-unit id="action.delete">
+                <source>action.delete</source>
+                <target>Borrar</target>
             </trans-unit>
 
             <trans-unit id="label.title">
@@ -431,6 +447,35 @@
             <trans-unit id="menu.Admin">
                 <source>menu.Admin</source>
                 <target>Administradora</target>
+            </trans-unit>
+            <trans-unit id="menu.Bells">
+                <source>menu.Bells</source>
+                <target>Campañas</target>
+            </trans-unit>
+            <trans-unit id="menu.Records">
+                <source>menu.Records</source>
+                <target>Registros</target>
+            </trans-unit>
+            <trans-unit id="menu.Teachers">
+                <source>menu.Teachers</source>
+                <target>Maestros</target>
+            </trans-unit>
+            <trans-unit id="menu.Userlist">
+                <source>menu.Userlist</source>
+                <target>Usuarios</target>
+            </trans-unit>
+            <trans-unit id="menu.Reports">
+                <source>menu.Reports</source>
+                <target>Informes</target>
+            </trans-unit>
+            <trans-unit id="menu.Antifraud">
+                <source>menu.Antifraud</source>
+                <target>Antifraude</target>
+            </trans-unit>
+
+            <trans-unit id="WORKSHOPS">
+                <source>WORKSHOPS</source>
+                <target>TALLERES</target>
             </trans-unit>
 
             <trans-unit id="post.created_successfully">

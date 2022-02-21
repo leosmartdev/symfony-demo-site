@@ -18,10 +18,13 @@
         #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link href="{{ asset('build/main.css') }}" rel="stylesheet">
+            <link href="{{ asset('build/main.css?v1.02') }}" rel="stylesheet">
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <!-- FontAwesome JS-->
+            <script src="{{ asset('assets/jquery/jquery-3.6.0.min.js')}}"></script>
+            <script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.js')}}"></script>
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -34,9 +37,9 @@
                 <div class="navbar navbar-default navbar-static-top" role="navigation">
                     <div class="container">
                         <div class="navbar-header col-md-3 col-lg-2">
-                            <a class="navbar-brand" href="{{ path('homepage') }}">
+                            {# <a class="navbar-brand" href="{{ path('homepage') }}">
                                 Symfony
-                            </a>
+                            </a> #}
 
                             <button type="button" class="navbar-toggle"
                                     data-toggle="collapse"
@@ -48,16 +51,47 @@
                             </button>
                         </div>
                         <div class="navbar-collapse collapse">
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-left">
 
                                 {% block header_navigation_links %}
-                                    <li>
+                                    {# <li>
                                         <a href="{{ path('user_view') }}">
                                             <i class="fa fa-home" aria-hidden="true"></i> {{'menu.dashboard'|trans }}
                                         </a>
+                                    </li> #}
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Bells'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Records'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('teacher_list') }}">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Teachers'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ path('user_list') }}">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Userlist'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Reports'|trans }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa" aria-hidden="true"></i> {{ 'menu.Antifraud'|trans }}
+                                        </a>
                                     </li>
 
-                                    {% if is_granted('ROLE_ADMIN') %}
+                                    {# {% if is_granted('ROLE_ADMIN') %}
                                         <li>
                                             <a href="{{ path('user_managements_index') }}">
                                                 <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.Admin'|trans }}
@@ -70,13 +104,15 @@
                                                 <i class="fa fa-lock" aria-hidden="true"></i> {{ 'menu.Admin'|trans }}
                                             </a>
                                         </li>
-                                    {% endif %}
+                                    {% endif %} #}
                                 {% endblock %}
 
-                                <li>
+                                {# <li>
                                     <a href="{{ path('blog_search') }}"> <i class="fa fa-search"></i> {{ 'menu.search'|trans }}</a>
-                                </li>
+                                </li> #}
+                            </ul>
 
+                            <ul class="nav navbar-nav navbar-right">
                                 {% if app.user %}
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="user">
@@ -171,5 +207,7 @@
            avoid errors when the 'intl' PHP extension is not available and the application
            is forced to use the limited "intl polyfill", which only supports UTC and GMT #}
         <!-- Page rendered on {{ 'now'|format_datetime('long', 'long', '', 'UTC') }} -->
+        {% block scripts %}
+        {% endblock %}
     </body>
 </html>

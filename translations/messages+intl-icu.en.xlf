@@ -156,6 +156,14 @@
                 <source>title.change_password</source>
                 <target>Change password</target>
             </trans-unit>
+            <trans-unit id="title.new_workshop">
+                <source>title.new_workshop</source>
+                <target>Add Workshop</target>
+            </trans-unit>
+            <trans-unit id="title.edit_workshop">
+                <source>title.edit_workshop</source>
+                <target>Edit Workshop</target>
+            </trans-unit>
 
             <trans-unit id="action.show">
                 <source>action.show</source>
@@ -256,6 +264,10 @@
             <trans-unit id="action.close">
                 <source>action.close</source>
                 <target>Close</target>
+            </trans-unit>
+            <trans-unit id="action.add">
+                <source>action.add</source>
+                <target>Add</target>
             </trans-unit>
 
             <trans-unit id="label.title">
@@ -402,6 +414,35 @@
             <trans-unit id="menu.Admin">
                 <source>menu.Admin</source>
                 <target>Admin</target>
+            </trans-unit>
+            <trans-unit id="menu.Bells">
+                <source>menu.Bells</source>
+                <target>Bells</target>
+            </trans-unit>
+            <trans-unit id="menu.Records">
+                <source>menu.Records</source>
+                <target>Records</target>
+            </trans-unit>
+            <trans-unit id="menu.Teachers">
+                <source>menu.Teachers</source>
+                <target>Teachers</target>
+            </trans-unit>
+            <trans-unit id="menu.Userlist">
+                <source>menu.Userlist</source>
+                <target>Users</target>
+            </trans-unit>
+            <trans-unit id="menu.Reports">
+                <source>menu.Reports</source>
+                <target>Reports</target>
+            </trans-unit>
+            <trans-unit id="menu.Antifraud">
+                <source>menu.Antifraud</source>
+                <target>Anti fraud</target>
+            </trans-unit>
+
+            <trans-unit id="WORKSHOPS">
+                <source>WORKSHOPS</source>
+                <target>WORKSHOPS</target>
             </trans-unit>
 
             <trans-unit id="post.to_publish_a_comment">

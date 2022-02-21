@@ -26,14 +26,7 @@ class ContollerViewController extends AbstractController
     #[Route('/', name: 'contoller_view_index', methods: ['GET'])]
     public function index(UserRepository $userRepository, Connection $conn, RolesRepository $rolesRepository): Response
     {
-        // $cur_rol = $this->getUser()->getCountry();
-        // return $this->render('contoller_view/index.html.twig', [
-        //     'users' => $userRepository->findAll(),
-        // ]);
-
         $cur_rol = $this->getUser()->getCountry();
-        // $queryBuilder = $conn->createQueryBuilder();
-        // $data = $queryBuilder->select('*')->from('usuarios_usu')->where("pais_usu = '$cur_rol'")->execute()->fetchAll();
         $users = $userRepository->getAllUsers(["country" => $cur_rol]);
         $roles = $rolesRepository->findAll();
         $rolesData = array();
@@ -41,7 +34,6 @@ class ContollerViewController extends AbstractController
             $rolesData[$role->getId()] = $role->getNombreRole();
         }
         return $this->render('contoller_view/index.html.twig', [
-            // 'users' => $userRepository->findAll(),
             'users' => $users,
             'roles' => $rolesData,
         ]);
@@ -116,14 +108,6 @@ class ContollerViewController extends AbstractController
             $user->setFechaMUsu(new \DateTime());
             $entityManager->persist($user);
             $entityManager->flush();
-
-            // $plainpwd = $user->getPassword();
-            // $hashedPassword = $passwordHasher->hashPassword(
-            //     $user,
-            //     $plainpwd
-            // );
-            // $user->setPassword($hashedPassword);
-            // $entityManager->flush();
 
             // remove prev roles
             $prevUserRoles = $userRolesRepository->getUserRoles($user->getId());

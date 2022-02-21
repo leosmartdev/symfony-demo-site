@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teachers{% endblock %}
+
+{% block body %}
+    {# <div>Teachers</div> #}
+    <div class="container mt-2 mb-5">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                <div class="hovereffect">
+                    <img class="img-responsive rounded w-100" src="{{ asset('assets/images/users/user-5.jpg') }}" alt="">
+                    <div class="overlay">
+                        <h2>{{ "WORKSHOPS"|trans }}</h2>
+                        <a class="info" href="{{ path('teacher_list_details') }}">{{ "SHOW"|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
