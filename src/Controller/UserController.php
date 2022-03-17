@@ -12,7 +12,7 @@
 namespace App\Controller;
 
 use App\Form\Type\ChangePasswordType;
-use App\Form\UserType;
+use App\Form\User2Type;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,7 +70,7 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(User2Type::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
